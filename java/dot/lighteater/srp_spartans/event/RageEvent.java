@@ -60,8 +60,13 @@ public class RageEvent {
 
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {
-        LivingEntity attacker = (LivingEntity) event.getSource().getEntity();
-        if (attacker != null && attacker.hasEffect(ModEffects.RAGE.get())) {
+        Entity source = event.getSource().getEntity();
+
+        if (!(source instanceof LivingEntity attacker)) {
+            return;
+        }
+
+        if (attacker.hasEffect(ModEffects.RAGE.get())) {
             int level = attacker.getEffect(ModEffects.RAGE.get()).getAmplifier();
             float multiplier = 1.0f + (0.25f * (level + 1));
             event.setAmount(event.getAmount() * multiplier);
@@ -85,3 +90,4 @@ public class RageEvent {
         }
     }
 }
+
