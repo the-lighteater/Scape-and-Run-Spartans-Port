@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "dot.lighteater.srp_spartans.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "refmap": "srp_spartans.refmap.json",
+  "client": [
+    "HeavyCrossbowItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
