@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "S": {
+      "item": "minecraft:spider_eye"
+    }
+  },
+  "pattern": [
+    " S ",
+    "RSR"
+  ],
+  "result": {
+    "item": "srp_spartans:serrated_spines"
+  },
+  "show_notification": true
+}

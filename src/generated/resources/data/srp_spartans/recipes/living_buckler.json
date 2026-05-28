@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": {
+      "item": "srp_spartans:hardened_bone_pole"
+    },
+    "L": {
+      "item": "srp_spartans:living_nucleus"
+    },
+    "V": {
+      "item": "srp_spartans:vile_plate"
+    }
+  },
+  "pattern": [
+    "LVV",
+    "VHV",
+    "VV "
+  ],
+  "result": {
+    "item": "srp_spartans:living_buckler"
+  },
+  "show_notification": true
+}

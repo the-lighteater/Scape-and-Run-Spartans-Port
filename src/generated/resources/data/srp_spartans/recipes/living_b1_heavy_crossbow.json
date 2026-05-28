@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:crossbow"
+    },
+    "D": {
+      "item": "minecraft:lead"
+    },
+    "H": {
+      "item": "srp_spartans:hardened_bone_pole"
+    },
+    "V": {
+      "item": "srp_spartans:vile_plate"
+    }
+  },
+  "pattern": [
+    "CDV",
+    "DH ",
+    "V H"
+  ],
+  "result": {
+    "item": "srp_spartans:living_b1_heavy_crossbow"
+  },
+  "show_notification": true
+}

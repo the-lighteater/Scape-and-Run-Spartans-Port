@@ -1,0 +1,6 @@
+{
+  "parent": "spartanweaponry:item/base/tomahawk_throwing",
+  "textures": {
+    "layer0": "srp_spartans:item/living_cr1_tomahawk"
+  }
+}

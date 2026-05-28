@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "srp_spartans:infectious_long_blade_fragment"
+    },
+    "H": {
+      "item": "srp_spartans:hardened_bone_pole"
+    },
+    "L": {
+      "item": "srp_spartans:living_nucleus"
+    },
+    "V": {
+      "item": "srp_spartans:vile_plate"
+    }
+  },
+  "pattern": [
+    "BBV",
+    " L ",
+    "H  "
+  ],
+  "result": {
+    "item": "srp_spartans:living_reaper_scythe"
+  },
+  "show_notification": true
+}

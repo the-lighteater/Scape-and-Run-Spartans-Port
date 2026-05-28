@@ -1,0 +1,6 @@
+{
+  "parent": "spartanweaponry:item/base/boomerang_throwing",
+  "textures": {
+    "layer0": "srp_spartans:item/living_i_boomerang"
+  }
+}

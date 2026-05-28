@@ -1,0 +1,6 @@
+{
+  "parent": "spartanweaponry:item/base/javelin_throwing",
+  "textures": {
+    "layer0": "srp_spartans:item/sentient_br3_javelin"
+  }
+}

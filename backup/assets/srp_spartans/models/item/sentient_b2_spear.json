@@ -1,0 +1,49 @@
+{
+  "parent": "spartanweaponry:item/base/spear",
+  "loader": "spartanweaponry:oil_coated_item",
+  "overrides": [
+    {
+      "model": "srp_spartans:item/sentient_b2_spear_blocking",
+      "predicate": {
+        "spartanweaponry:blocking": 1.0
+      }
+    },
+    {
+      "model": "srp_spartans:item/sentient_b2_spear_throwing",
+      "predicate": {
+        "spartanweaponry:throwing": 1.0
+      }
+    }
+  ],
+  "textures": {
+    "coating": "spartanweaponry:item/coating/spear",
+    "layer0": "srp_spartans:item/sentient_b2_spear"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ -55, -90, 0 ],
+      "translation": [ 0.00, 0.50, 2.00 ],
+      "scale": [ 4.25, 4.25, 2.0 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ -55, 90, 0 ],
+      "translation": [ 0.00, 0.50, 2.00 ],
+      "scale": [ 4.25, 4.25, 2.00 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, -90, 30 ],
+      "translation": [ 1.13, 5.0, 1.13 ],
+      "scale": [ 1.7, 1.7, 0.95 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 0, 90, -30 ],
+      "translation": [ 1.13, 5.0, 1.13 ],
+      "scale": [ 1.7, 1.7, 0.95 ]
+    },
+    "ground": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0.00, 4.25, 0.00 ],
+      "scale": [ 0.9375, 0.9375, 0.46875 ]
+    }
+  }
+}

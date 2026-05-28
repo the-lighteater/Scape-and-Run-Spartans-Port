@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "minecraft:arrow"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "R": {
+      "item": "minecraft:rotten_flesh"
+    }
+  },
+  "pattern": [
+    " R ",
+    "EAE",
+    "RER"
+  ],
+  "result": {
+    "item": "srp_spartans:vile_plate"
+  },
+  "show_notification": true
+}

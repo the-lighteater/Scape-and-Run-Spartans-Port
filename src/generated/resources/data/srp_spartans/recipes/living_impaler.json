@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": {
+      "item": "srp_spartans:hardened_bone_pole"
+    },
+    "L": {
+      "item": "srp_spartans:living_nucleus"
+    },
+    "P": {
+      "item": "srp_spartans:serrated_spines"
+    },
+    "V": {
+      "item": "srp_spartans:vile_plate"
+    }
+  },
+  "pattern": [
+    "LVP",
+    "VHV",
+    "PVV"
+  ],
+  "result": {
+    "item": "srp_spartans:living_impaler"
+  },
+  "show_notification": true
+}

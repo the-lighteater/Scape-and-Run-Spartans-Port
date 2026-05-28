@@ -1,0 +1,6 @@
+{
+  "parent": "spartanweaponry:item/base/throwing_knife_throwing",
+  "textures": {
+    "layer0": "srp_spartans:item/sentient_vr2_throwing_knife"
+  }
+}

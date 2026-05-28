@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:slime_ball"
+    },
+    "D": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "R": {
+      "item": "minecraft:rotten_flesh"
+    }
+  },
+  "pattern": [
+    " G ",
+    "RBR",
+    " D "
+  ],
+  "result": {
+    "item": "srp_spartans:living_nucleus"
+  },
+  "show_notification": true
+}

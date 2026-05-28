@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "S": {
+      "item": "minecraft:spider_eye"
+    }
+  },
+  "pattern": [
+    "SSR",
+    "RSR",
+    "SSR"
+  ],
+  "result": {
+    "item": "srp_spartans:hardened_bone_pole"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": {
+      "item": "minecraft:string"
+    },
+    "L": {
+      "item": "srp_spartans:living_nucleus"
+    },
+    "V": {
+      "item": "srp_spartans:vile_plate"
+    }
+  },
+  "pattern": [
+    " VG",
+    "L G",
+    " VG"
+  ],
+  "result": {
+    "item": "srp_spartans:living_b1_longbow"
+  },
+  "show_notification": true
+}

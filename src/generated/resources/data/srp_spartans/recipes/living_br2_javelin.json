@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "srp_spartans:infectious_long_blade_fragment"
+    },
+    "H": {
+      "item": "srp_spartans:hardened_bone_pole"
+    },
+    "L": {
+      "item": "srp_spartans:living_nucleus"
+    },
+    "V": {
+      "item": "srp_spartans:vile_plate"
+    }
+  },
+  "pattern": [
+    "VV ",
+    "HLB"
+  ],
+  "result": {
+    "item": "srp_spartans:living_br2_javelin"
+  },
+  "show_notification": true
+}

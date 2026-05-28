@@ -1,0 +1,6 @@
+{
+  "parent": "spartanweaponry:item/base/longbow_pulling",
+  "textures": {
+    "layer0": "srp_spartans:item/sentient_b2_longbow_pulling_2"
+  }
+}
