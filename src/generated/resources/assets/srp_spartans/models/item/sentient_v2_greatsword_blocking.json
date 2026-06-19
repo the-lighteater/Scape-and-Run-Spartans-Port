@@ -4,5 +4,27 @@
   "textures": {
     "coating": "spartanweaponry:item/coating/greatsword",
     "layer0": "srp_spartans:item/sentient_v2_greatsword"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ 0, -90, 55 ],
+      "translation": [ 0, 8.50, 0.5 ],
+      "scale": [3.4, 3.4, 1]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 0, 90, -55 ],
+      "translation": [ 0, 8.50, 0.5 ],
+      "scale": [3.4, 3.4, 1]
+    },
+    "firstperson_righthand": {
+      "rotation": [ -10, 170, 0 ],
+      "translation": [ -7.00, 4.20, 2.13 ],
+      "scale": [1.9, 1.9, 0.68]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ -10, -170, -90 ],
+      "translation": [ -7.00, 4.20, 2.13 ],
+      "scale": [1.9, 1.9, 0.68]
+    }
   }
 }
