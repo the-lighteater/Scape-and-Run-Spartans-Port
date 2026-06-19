@@ -48,7 +48,7 @@
 		    "overrides": [
         {
             "predicate": {
-                "blocking": 1
+                "srp_spartans:blocking": 1
             },
             "model": "srp_spartans:item/living_buckler_blocking"
         }
