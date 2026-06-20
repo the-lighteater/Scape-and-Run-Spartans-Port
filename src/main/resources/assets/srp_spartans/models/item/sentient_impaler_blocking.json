@@ -922,12 +922,12 @@
 		},
 		"firstperson_righthand": {
 			"rotation": [0, 0, 20],
-			"translation": [-1, 2, 0],
+			"translation": [0, 1, 0],
 			"scale": [1.2, 1.2, 1.2]
 		},
 		"firstperson_lefthand": {
 			"rotation": [0, 0, 20],
-			"translation": [-1, 2, 0],
+			"translation": [0, 1, 0],
 			"scale": [1.2, 1.2, 1.2]
 		},
 		"gui": {

@@ -318,11 +318,11 @@
 		},
 		"firstperson_righthand": {
 			"rotation": [0, 0, 20],
-			"translation": [-6, 2, 0]
+			"translation": [-2, 1, 0]
 		},
 		"firstperson_lefthand": {
 			"rotation": [0, 0, 20],
-			"translation": [-6, 2, 0]
+			"translation": [-2, 1, 0]
 		},
 		"ground": {
 			"translation": [0, 3, 0],
