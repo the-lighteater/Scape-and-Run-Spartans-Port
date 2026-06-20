@@ -1,0 +1,9 @@
+{
+  "effect": "srp_spartans:bleeding",
+  "base_duration": 120,
+  "duration_per_level": 120,
+  "amplifier_per_level": 1,
+  "show_particles": true,
+  "ambient": false,
+  "show_icon": true
+}
