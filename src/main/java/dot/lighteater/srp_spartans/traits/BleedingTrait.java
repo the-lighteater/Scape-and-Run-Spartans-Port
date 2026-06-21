@@ -15,8 +15,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class BleedingTrait extends BetterWeaponTrait {
 
-    private static final int BASE_DURATION_TICKS = 20 * 6;
-
     public BleedingTrait() {
         super("bleeding", "srp_spartans", TraitQuality.POSITIVE);
         this.setUniversal();
@@ -37,21 +35,23 @@ public class BleedingTrait extends BetterWeaponTrait {
         TraitEffectData data = TraitDataLoader.get(new ResourceLocation("srp_spartans", "bleeding"));
         if (data == null) return;
 
-        var effectRL = new ResourceLocation(data.effect);
-        var effect = ForgeRegistries.MOB_EFFECTS.getValue(effectRL);
-        if (effect == null) return;
+        for (TraitEffectData.EffectEntry effectEntry : data.effects) {
 
+            ResourceLocation effectRL = new ResourceLocation(effectEntry.effect);
+            var effect = ForgeRegistries.MOB_EFFECTS.getValue(effectRL);
+            if (effect == null) continue;
 
-        int duration = data.baseDuration + (data.durationPerLevel * (level - 1));
-        int amplifier = Math.max(0, (level - 1) * data.amplifierPerLevel);
+            int duration = effectEntry.baseDuration + (effectEntry.durationPerLevel * (level - 1));
+            int amplifier = Math.max(0, (level - 1) * effectEntry.amplifierPerLevel);
 
-        target.addEffect(new MobEffectInstance(
-                effect,
-                duration,
-                amplifier,
-                data.ambient,
-                data.showParticles,
-                data.showIcon
-        ));
+            target.addEffect(new MobEffectInstance(
+                    effect,
+                    duration,
+                    amplifier,
+                    effectEntry.ambient,
+                    effectEntry.showParticles,
+                    effectEntry.showIcon
+            ));
+        }
     }
 }

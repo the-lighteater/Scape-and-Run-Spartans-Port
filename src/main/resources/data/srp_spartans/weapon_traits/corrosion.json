@@ -1,7 +1,7 @@
 {
   "effects": [
     {
-      "effect": "srp_spartans:bleeding",
+      "effect": "srp_spartans:corrosion",
       "base_duration": 120,
       "duration_per_level": 120,
       "amplifier_per_level": 1,

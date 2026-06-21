@@ -13,8 +13,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class CorrosionEffect extends MobEffect {
-    private static final Logger LOGGER = LogManager.getLogger("Corrosion Effect");
-
 
     public static final int TICK_INTERVAL = 20;
     public static final int DURABILITY_PER_TICK = 3;
@@ -37,7 +35,6 @@ public class CorrosionEffect extends MobEffect {
         if (durationLeft % TICK_INTERVAL != 0) return;
 
         int extraDurability = DURABILITY_PER_TICK * amplifier;
-        LOGGER.info(extraDurability);
 
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (!slot.getType().equals(EquipmentSlot.Type.ARMOR)) continue;
