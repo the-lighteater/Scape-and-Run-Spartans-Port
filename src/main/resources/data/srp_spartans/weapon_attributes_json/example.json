@@ -1,0 +1,22 @@
+{
+  "attributes": [
+    {
+      "attribute": "minecraft:generic.attack_damage",
+      "modifier": 10.0,
+      "operation": "addition",
+      "uuid": "[material]_[weapon]_[attribute]"
+    },
+    {
+      "attribute": "minecraft:generic.attack_speed",
+      "modifier": 0.0,
+      "operation": "multiply_base",
+      "uuid": "[material]_[weapon]_[attribute]"
+    },
+    {
+      "attribute": "minecraft:generic.luck",
+      "modifier": -1.0,
+      "operation": "multiply_total",
+      "uuid": "[material]_[weapon]_[attribute]"
+    }
+  ]
+}

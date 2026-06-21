@@ -19,18 +19,48 @@ public class TrackerEvent {
 
     @SubscribeEvent
     public static void onItemTooltip(ItemTooltipEvent event) {
+
         ItemStack stack = event.getItemStack();
         if (stack.isEmpty() || !stack.hasTag()) return;
-        ResourceLocation itemId = event.getItemStack().getItem().builtInRegistryHolder().key().location();
+
+        ResourceLocation itemId = event.getItemStack()
+                .getItem()
+                .builtInRegistryHolder()
+                .key()
+                .location();
+
         if (!itemId.getNamespace().equals("srp_spartans")) return;
+
         CompoundTag tag = stack.getOrCreateTag();
 
         float total = tag.getFloat(DAMAGE_KEY);
+        float cap = Config.DAMAGE_CAP.get();
+
         if (total > 0) {
-            event.getToolTip().add(Component.literal("Damage: ")
-                    .append(Component.literal(String.valueOf(total))
-                            .append(Component.literal(" / "))
-                            .append(Component.literal(String.valueOf(Config.DAMAGE_CAP.get())))));
+
+            int segments = 10;
+            int filled = (int) Math.floor((total / cap) * segments);
+            filled = Math.max(0, Math.min(segments, filled));
+
+            String bar = "█".repeat(filled) + "░".repeat(segments - filled);
+
+            event.getToolTip().add(
+                    Component.literal("Evolution: ")
+                            .withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal(bar)
+                                    .withStyle(ChatFormatting.DARK_PURPLE))
+            );
+
+            event.getToolTip().add(
+                    Component.literal("Damage: ")
+                            .withStyle(ChatFormatting.GRAY)
+                            .append(Component.literal(String.valueOf(total))
+                                    .withStyle(ChatFormatting.RED))
+                            .append(Component.literal(" / ")
+                                    .withStyle(ChatFormatting.DARK_GRAY))
+                            .append(Component.literal(String.valueOf(cap))
+                                    .withStyle(ChatFormatting.DARK_GRAY))
+            );
         }
     }
 }
