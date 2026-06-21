@@ -203,7 +203,7 @@ dependencies {
 
     compileOnly(fg.deobf("curse.maven:geckolib-388172:6920925"))
 
-    implementation fg.deobf("curse.maven:unions-upgrade-scrolls-port-1380424:7227939")
+    implementation fg.deobf("curse.maven:unions-upgrade-scrolls-port-1380424:7949037")
     implementation fg.deobf("curse.maven:jade-324717:6855440")
 
     implementation fg.deobf("curse.maven:spcestus-1358580:7065029")
