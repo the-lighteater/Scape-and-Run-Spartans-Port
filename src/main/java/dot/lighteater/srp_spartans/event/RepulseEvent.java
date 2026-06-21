@@ -3,6 +3,7 @@ package dot.lighteater.srp_spartans.event;
 import dot.lighteater.srp_spartans.SRPSpartans;
 import dot.lighteater.srp_spartans.effect.ModEffects;
 import krelox.spartantoolkit.WeaponType;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -140,21 +141,42 @@ public class RepulseEvent {
     @SubscribeEvent
     public static void onTooltip(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
-
         if (stack.isEmpty()) return;
 
-        ResourceLocation id = stack.getItem().builtInRegistryHolder().key().location();
+        ResourceLocation id = stack.getItem()
+                .builtInRegistryHolder()
+                .key()
+                .location();
 
         if (!getValidShieldIds().contains(id)) return;
 
         List<Component> tooltip = event.getToolTip();
 
-        tooltip.add(Component.empty());
+        int insertIndex = tooltip.size();
 
-        tooltip.add(Component.literal("§6Material Traits:"));
+        for (int i = 0; i < tooltip.size(); i++) {
+            Component line = tooltip.get(i);
 
-        if (getValidBucklerShieldIds().contains(id)) tooltip.add(Component.literal("§bRepulse"));
+            if (line.getStyle().getColor().getValue() == ChatFormatting.DARK_GRAY.getColor()
+            && line.getString().contains(SRPSpartans.MODID)) {
+                insertIndex = i;
+                break;
+            }
+        }
 
-        if (getValidImpalerShieldIds().contains(id)) tooltip.add(Component.literal("§bCharger"));
+        tooltip.add(insertIndex++, Component.empty());
+
+        tooltip.add(insertIndex++, Component.literal("Material Traits:")
+                .withStyle(ChatFormatting.GOLD));
+
+        if (getValidBucklerShieldIds().contains(id)) {
+            tooltip.add(insertIndex++, Component.literal(" * Repulse")
+                    .withStyle(ChatFormatting.AQUA));
+        }
+
+        if (getValidImpalerShieldIds().contains(id)) {
+            tooltip.add(insertIndex, Component.literal(" * Charger")
+                    .withStyle(ChatFormatting.AQUA));
+        }
     }
 }

@@ -1,5 +1,4 @@
-// 1.20.1	2025-11-22T15:04:42.0045696	Spartan Weaponry Weapon Trait Tags
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/srp_spartans/tags/spartanweaponry/weapon_traits/living.json
+// 1.20.1	2026-06-19T15:33:43.5223853	Spartan Weaponry Weapon Trait Tags
 40c6d37117e190ec4f2d4eafb9ea5937556ffb48 data/srp_spartans/tags/spartanweaponry/weapon_traits/living_b1.json
 df278b2575e3e11718f4dd9ab88b091fb08fb47b data/srp_spartans/tags/spartanweaponry/weapon_traits/living_b2.json
 9c4adfaa29e844798adf2e6119d12b03bc269620 data/srp_spartans/tags/spartanweaponry/weapon_traits/living_br1.json
@@ -15,7 +14,6 @@ e1048dcf9f7c1a5e395345317fabaec7556ba126 data/srp_spartans/tags/spartanweaponry/
 51a04603ba97b77c2023f1bee91f65a37ee81c38 data/srp_spartans/tags/spartanweaponry/weapon_traits/living_v1.json
 1c88208e83d6e80703b94061cf2d6ee646a1b2cb data/srp_spartans/tags/spartanweaponry/weapon_traits/living_v2.json
 d1ab76b41407aea47b22ee1da10f9e96ef24b225 data/srp_spartans/tags/spartanweaponry/weapon_traits/living_vr1.json
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/srp_spartans/tags/spartanweaponry/weapon_traits/sentient.json
 cc55e444ddf157b5b39d759ed3a925dc7994a26f data/srp_spartans/tags/spartanweaponry/weapon_traits/sentient_b2.json
 2fb7f707f260f33a9539e80ed4e36bc9a70566b3 data/srp_spartans/tags/spartanweaponry/weapon_traits/sentient_b3.json
 49d0f9d57c9c54284e90626ff36d224e88968385 data/srp_spartans/tags/spartanweaponry/weapon_traits/sentient_br2.json

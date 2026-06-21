@@ -6,6 +6,7 @@ import dot.lighteater.srp_spartans.effect.ModEffects;
 import dot.lighteater.srp_spartans.item.ModSpartanWeaponry;
 import dot.lighteater.srp_spartans.item.WeaponEvoTracker;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -20,7 +21,7 @@ public class SRPSpartans
     // Define mod id in a common place for everything to reference
     public static final String MODID = "srp_spartans";
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public SRPSpartans(FMLJavaModLoadingContext context)
     {
@@ -35,6 +36,11 @@ public class SRPSpartans
         MinecraftForge.EVENT_BUS.register(this);
 
         WeaponEvoTracker.init();
+
+        MinecraftForge.EVENT_BUS.addListener((AddReloadListenerEvent event) -> {
+            event.addListener(new TraitDataLoader());
+            event.addListener(new WeaponAttributeLoader());
+        });
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
     }

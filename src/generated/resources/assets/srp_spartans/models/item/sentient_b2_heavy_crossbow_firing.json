@@ -2,5 +2,27 @@
   "parent": "spartanweaponry:item/base/heavy_crossbow_firing",
   "textures": {
     "layer0": "srp_spartans:item/sentient_b2_heavy_crossbow_loaded"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ 270, 0, 315 ],
+      "translation": [ 0, 0.50, -3.00 ],
+      "scale": [ 1.5, 1.5, 1.5 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 270, 0, 45 ],
+      "translation": [ 0, 0.5, -3.00 ],
+      "scale": [ 1.5, 1.5, 1.5 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 270, 0, 305 ],
+      "translation": [ 11.0, 1.00, -0.75],
+      "scale": [ 1.25, 1.25, 1.25 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 270, 0, 35 ],
+      "translation": [ 11.0, 1.00, -0.75],
+      "scale": [ 1.25, 1.25, 1.25 ]
+    }
   }
 }
