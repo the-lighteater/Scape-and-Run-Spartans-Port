@@ -2,6 +2,7 @@ package dot.lighteater.srp_spartans.item;
 
 import dot.lighteater.srp_spartans.Config;
 import dot.lighteater.srp_spartans.SRPSpartans;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -26,20 +27,50 @@ public class ShieldEvents {
 
     @SubscribeEvent
     public static void onItemTooltip(ItemTooltipEvent event) {
+
         ItemStack stack = event.getItemStack();
+
+        if (stack.isEmpty()) return;
         if (!(stack.getItem() instanceof ShieldItem)) return;
-        if (stack.isEmpty() || !stack.hasTag()) return;
-        CompoundTag tag = stack.getOrCreateTag();
-        ResourceLocation itemId = event.getItemStack().getItem().builtInRegistryHolder().key().location();
+
+        ResourceLocation itemId = stack.getItem()
+                .builtInRegistryHolder()
+                .key()
+                .location();
+
         if (!itemId.getNamespace().equals("srp_spartans")) return;
 
+        CompoundTag tag = stack.getOrCreateTag();
+
         float total = tag.getFloat("BlockedDamage");
-        if (total > 0) {
-            event.getToolTip().add(Component.literal("Blocked Damage: ")
-                    .append(Component.literal(String.valueOf(total))
-                            .append(Component.literal(" / "))
-                            .append(Component.literal(String.valueOf(Config.BLOCKED_DAMAGE_CAP.get())))));
-        }
+        float cap = Config.BLOCKED_DAMAGE_CAP.get();
+
+        if (total <= 0) return;
+
+        int segments = 10;
+        float ratio = Math.min(total / cap, 1.0f);
+
+        int filled = (int) (ratio * segments);
+
+        String bar = "█".repeat(filled) + "░".repeat(segments - filled);
+
+        event.getToolTip().add(
+                Component.literal("Shield Evolution: ")
+                        .withStyle(ChatFormatting.GRAY)
+                        .append(Component.literal(bar)
+                                .withStyle(ChatFormatting.BLUE))
+        );
+
+        event.getToolTip().add(
+                Component.literal("Blocked Damage: ")
+                        .withStyle(ChatFormatting.GRAY)
+                        .append(Component.literal(String.format("%.1f", total))
+                                .withStyle(ChatFormatting.AQUA))
+                        .append(Component.literal(" / ")
+                                .withStyle(ChatFormatting.DARK_GRAY))
+                        .append(Component.literal(String.format("%.1f", cap))
+                                .withStyle(ChatFormatting.DARK_GRAY))
+        );
     }
 
     @SubscribeEvent

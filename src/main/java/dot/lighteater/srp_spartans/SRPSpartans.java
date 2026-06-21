@@ -39,6 +39,7 @@ public class SRPSpartans
 
         MinecraftForge.EVENT_BUS.addListener((AddReloadListenerEvent event) -> {
             event.addListener(new TraitDataLoader());
+            event.addListener(new WeaponAttributeLoader());
         });
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
