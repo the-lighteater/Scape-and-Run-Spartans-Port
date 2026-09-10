@@ -25,23 +25,21 @@ public class SRPSpartans
 
     public SRPSpartans(FMLJavaModLoadingContext context)
     {
-        context.registerConfig(ModConfig.Type.SERVER, Config.SPEC);
-
         IEventBus modEventBus = context.getModEventBus();
 
         ModSpartanWeaponry.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-        ModEffects.EFFECTS.register(modEventBus);
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
-
         WeaponEvoTracker.init();
+
+        ModEffects.EFFECTS.register(modEventBus);
+
+        MinecraftForge.EVENT_BUS.register(this);
 
         MinecraftForge.EVENT_BUS.addListener((AddReloadListenerEvent event) -> {
             event.addListener(new TraitDataLoader());
             event.addListener(new WeaponAttributeLoader());
         });
 
-        // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
+        context.registerConfig(ModConfig.Type.SERVER, Config.SPEC);
     }
 }

@@ -404,7 +404,6 @@ public class ModSpartanWeaponry extends SpartanAddon {
                 new WeaponConfig(LIVING_IMMALLEABLE, SENTIENT_IMMALLEABLE, WeaponType.BATTLEAXE, new RecipeData(new String[]{"BVB","BLB"," H "}))
                 );
 
-
         itemRecipes = List.of(Pair.of(HARDENED_BONE_POLE, new RecipeData(new String[]{"SSR", "RSR", "SSR"})),
                 Pair.of(LIVING_NUCLEUS, new RecipeData(new String[]{" G ", "RBR", " D "})),
                 Pair.of(LONG_BLADE_FRAGMENT, new RecipeData(new String[]{"ROO", "RO ", "RO "})),
