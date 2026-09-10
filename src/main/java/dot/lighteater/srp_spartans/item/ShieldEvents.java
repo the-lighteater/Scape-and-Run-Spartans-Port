@@ -21,9 +21,11 @@ import static dot.lighteater.srp_spartans.item.ModSpartanWeaponry.*;
 @Mod.EventBusSubscriber(modid = SRPSpartans.MODID)
 public class ShieldEvents {
 
-    public static float BlockedTotal = 20000f;
-
     private static final double CHARGE_THRESHOLD = 10.0;
+
+    private static final String BLOCKED_DAMAGE_KEY = "BlockedDamage";
+    private static final String BLOCKED_INSTANCE_KEY = "BlockedDamageInstance";
+    private static final String CHARGED_KEY = "Charged";
 
     @SubscribeEvent
     public static void onItemTooltip(ItemTooltipEvent event) {
@@ -42,7 +44,7 @@ public class ShieldEvents {
 
         CompoundTag tag = stack.getOrCreateTag();
 
-        float total = tag.getFloat("BlockedDamage");
+        float total = tag.getFloat(BLOCKED_DAMAGE_KEY);
         float cap = Config.BLOCKED_DAMAGE_CAP.get();
 
         if (total <= 0) return;
@@ -57,81 +59,149 @@ public class ShieldEvents {
         event.getToolTip().add(
                 Component.literal("Shield Evolution: ")
                         .withStyle(ChatFormatting.GRAY)
-                        .append(Component.literal(bar)
-                                .withStyle(ChatFormatting.BLUE))
+                        .append(
+                                Component.literal(bar)
+                                        .withStyle(ChatFormatting.BLUE)
+                        )
         );
 
         event.getToolTip().add(
                 Component.literal("Blocked Damage: ")
                         .withStyle(ChatFormatting.GRAY)
-                        .append(Component.literal(String.format("%.1f", total))
-                                .withStyle(ChatFormatting.AQUA))
-                        .append(Component.literal(" / ")
-                                .withStyle(ChatFormatting.DARK_GRAY))
-                        .append(Component.literal(String.format("%.1f", cap))
-                                .withStyle(ChatFormatting.DARK_GRAY))
+                        .append(
+                                Component.literal(String.format("%.1f", total))
+                                        .withStyle(ChatFormatting.AQUA)
+                        )
+                        .append(
+                                Component.literal(" / ")
+                                        .withStyle(ChatFormatting.DARK_GRAY)
+                        )
+                        .append(
+                                Component.literal(String.format("%.1f", cap))
+                                        .withStyle(ChatFormatting.DARK_GRAY)
+                        )
         );
     }
 
     @SubscribeEvent
     public static void onPlayerBlock(LivingAttackEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
-        ResourceLocation itemId = player.getUseItem().getItem().builtInRegistryHolder().key().location();
-        if (!itemId.getNamespace().equals("srp_spartans")) return;
-        ItemStack shieldStack = player.getUseItem();
-        if (!(shieldStack.getItem() instanceof ShieldItem) && !(shieldStack.getItem() instanceof ChargedShieldItem)) return;
 
+        if (event.isCanceled()) return;
+
+        if (!(event.getEntity() instanceof Player player)) return;
+
+        if (player.level().isClientSide()) return;
+
+        ItemStack shieldStack = player.getUseItem();
+
+        if (shieldStack.isEmpty()) return;
+
+        if (!(shieldStack.getItem() instanceof ShieldItem)
+                && !(shieldStack.getItem() instanceof ChargedShieldItem)) {
+            return;
+        }
+
+        ResourceLocation itemId = shieldStack.getItem()
+                .builtInRegistryHolder()
+                .key()
+                .location();
+
+        if (!itemId.getNamespace().equals("srp_spartans")) return;
 
         CompoundTag tag = shieldStack.getOrCreateTag();
-        double blocked = tag.getDouble("BlockedDamage");
-        double blockedInstance;
-        if (shieldStack.getItem() instanceof ChargedShieldItem) {
-            blockedInstance = tag.getDouble("BlockedDamageInstance");
-            blockedInstance += event.getAmount();
-        } else blockedInstance = 0;
+
+        double blocked = tag.getDouble(BLOCKED_DAMAGE_KEY);
         blocked += event.getAmount();
 
-        tag.putDouble("BlockedDamage", blocked);
-        tag.putDouble("BlockedDamageInstance", blockedInstance);
+        tag.putDouble(BLOCKED_DAMAGE_KEY, blocked);
 
-        if ((shieldStack.getItem() instanceof ChargedShieldItem)) {
+        /*
+         * Charged shield tracking
+         */
+        if (shieldStack.getItem() instanceof ChargedShieldItem) {
+
+            double blockedInstance =
+                    tag.getDouble(BLOCKED_INSTANCE_KEY);
+
+            blockedInstance += event.getAmount();
+
+            tag.putDouble(
+                    BLOCKED_INSTANCE_KEY,
+                    blockedInstance
+            );
+
             if (blockedInstance >= CHARGE_THRESHOLD) {
-                tag.putBoolean("Charged", true);
+                tag.putBoolean(CHARGED_KEY, true);
             }
         }
 
+        /*
+         * Shield evolution
+         */
         if (blocked >= Config.BLOCKED_DAMAGE_CAP.get()) {
-            if (shieldStack.getHoverName().getString().equals("Living Impaler")) {
-                if (player.getMainHandItem().getHoverName().getString().equals("Living Impaler")) {
-                    player.setItemInHand(InteractionHand.MAIN_HAND, SENTIENT_IMPALER.get().getDefaultInstance());
-                } else {
-                    player.setItemInHand(InteractionHand.OFF_HAND, SENTIENT_IMPALER.get().getDefaultInstance());
-                }
-            } else if (shieldStack.getHoverName().getString().equals("Living Buckler")) {
-                if (player.getMainHandItem().getHoverName().getString().equals("Living Buckler")) {
-                    player.setItemInHand(InteractionHand.MAIN_HAND, SENTIENT_BUCKLER.get().getDefaultInstance());
-                } else {
-                    player.setItemInHand(InteractionHand.OFF_HAND, SENTIENT_BUCKLER.get().getDefaultInstance());
-                }
+
+            InteractionHand hand;
+
+            if (player.getMainHandItem() == shieldStack) {
+                hand = InteractionHand.MAIN_HAND;
+            } else {
+                hand = InteractionHand.OFF_HAND;
             }
+
+            evolveShield(player, shieldStack, hand);
         }
+    }
+
+    private static void evolveShield(
+            Player player,
+            ItemStack oldShield,
+            InteractionHand hand
+    ) {
+        ItemStack evolved;
+
+        if (oldShield.is(LIVING_IMPALER.get())) {
+            evolved = SENTIENT_IMPALER.get().getDefaultInstance();
+
+        } else if (oldShield.is(LIVING_BUCKLER.get())) {
+            evolved = SENTIENT_BUCKLER.get().getDefaultInstance();
+
+        } else {
+            return;
+        }
+
+        CompoundTag oldTag = oldShield.getTag();
+
+        if (oldTag != null) {
+
+            CompoundTag newTag = oldTag.copy();
+
+            newTag.remove(BLOCKED_DAMAGE_KEY);
+            newTag.remove(BLOCKED_INSTANCE_KEY);
+            newTag.remove(CHARGED_KEY);
+
+            evolved.setTag(newTag);
+        }
+
+        player.setItemInHand(hand, evolved);
     }
 
     @SubscribeEvent
-    public static void onStopUsingShield(LivingEntityUseItemEvent.Stop event) {
+    public static void onStopUsingShield(
+            LivingEntityUseItemEvent.Stop event
+    ) {
         if (!(event.getEntity() instanceof Player player)) return;
 
         ItemStack stack = event.getItem();
+
         if (!(stack.getItem() instanceof ChargedShieldItem)) return;
 
         CompoundTag tag = stack.getOrCreateTag();
-        if (!tag.getBoolean("Charged")) return;
+
+        if (!tag.getBoolean(CHARGED_KEY)) return;
 
         ShieldDashHandler.dash(player);
 
-        tag.putBoolean("Charged", false);
-        tag.putDouble("BlockedDamageInstance", 0.0);
+        tag.putBoolean(CHARGED_KEY, false);
+        tag.putDouble(BLOCKED_INSTANCE_KEY, 0.0);
     }
 }
-
-
