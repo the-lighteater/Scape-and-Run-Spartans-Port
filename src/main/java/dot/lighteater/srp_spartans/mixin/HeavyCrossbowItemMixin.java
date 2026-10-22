@@ -61,39 +61,46 @@ public abstract class HeavyCrossbowItemMixin {
                         WeaponType.HEAVY_CROSSBOW
                 ).get();
 
-        int projectileCount = crossbow.is(sentientWeapon) ? 3
-                : crossbow.is(livingWeapon) ? 2
+        int projectileCount = crossbow.is(sentientWeapon) ? 5
+                : crossbow.is(livingWeapon) ? 3
                 : 1;
-
-        SRPSpartans.LOGGER.debug(
-                "[HeavyCrossbowMixin] Firing {} projectile(s) from {}",
-                projectileCount,
-                crossbow.getItem()
-        );
 
         HeavyCrossbowItemMixin mixin =
                 (HeavyCrossbowItemMixin) (Object) instance;
 
-        if (projectileCount == 2) {
-            // Two-projectile spread.
-            mixin.spawnProjectile(
-                    crossbow, boltItem, boltStack, level, player,
-                    creativeOrInfinite, inaccuracyModifier, -5.0F
-            );
-
-            mixin.spawnProjectile(
-                    crossbow, boltItem, boltStack, level, player,
-                    creativeOrInfinite, inaccuracyModifier, 5.0F
-            );
-
-        } else {
-            // Preserve the original shot.
+        if (projectileCount == 3) {
             mixin.spawnProjectile(
                     crossbow, boltItem, boltStack, level, player,
                     creativeOrInfinite, inaccuracyModifier, projectileAngle
             );
 
-            if (projectileCount == 3) {
+            mixin.spawnProjectile(
+                    crossbow, boltItem, boltStack, level, player,
+                    creativeOrInfinite, inaccuracyModifier, -10.0F
+            );
+
+            mixin.spawnProjectile(
+                    crossbow, boltItem, boltStack, level, player,
+                    creativeOrInfinite, inaccuracyModifier, 10.0F
+            );
+
+        } else {
+            mixin.spawnProjectile(
+                    crossbow, boltItem, boltStack, level, player,
+                    creativeOrInfinite, inaccuracyModifier, projectileAngle
+            );
+
+            if (projectileCount == 5) {
+                mixin.spawnProjectile(
+                        crossbow, boltItem, boltStack, level, player,
+                        creativeOrInfinite, inaccuracyModifier, -5.0F
+                );
+
+                mixin.spawnProjectile(
+                        crossbow, boltItem, boltStack, level, player,
+                        creativeOrInfinite, inaccuracyModifier, 5.0F
+                );
+
                 mixin.spawnProjectile(
                         crossbow, boltItem, boltStack, level, player,
                         creativeOrInfinite, inaccuracyModifier, -10.0F
