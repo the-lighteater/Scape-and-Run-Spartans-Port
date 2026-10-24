@@ -423,17 +423,17 @@ public class ModSpartanWeaponry extends SpartanAddon {
                 Pair.of(LIVING_IMPALER, new RecipeData(new String[]{"LVP", "VHV", "PVV"}))
         );
 
-        LIVING_GAUNTLET_MATERIAL = new WeaponMaterial("living_gauntlet", "srp_spartans", 1000, 4, 9f, 15, ItemTags.create(new ResourceLocation("srp_spartans:repair_material")), ModWeaponTraitTags.create("materials/living_gauntlet"));
-        SENTIENT_GAUNTLET_MATERIAL = new WeaponMaterial("sentient_gauntlet", "srp_spartans", 1000, 4, 13f, 15, ItemTags.create(new ResourceLocation("srp_spartans:repair_material")), ModWeaponTraitTags.create("materials/sentient_gauntlet"));
+        LIVING_GAUNTLET_MATERIAL = new WeaponMaterial("living_gauntlet", "srp_spartans", 1000, 4, 15f, 15, ItemTags.create(new ResourceLocation("srp_spartans:repair_material")), ModWeaponTraitTags.create("materials/living_gauntlet"));
+        SENTIENT_GAUNTLET_MATERIAL = new WeaponMaterial("sentient_gauntlet", "srp_spartans", 1000, 4, 25f, 15, ItemTags.create(new ResourceLocation("srp_spartans:repair_material")), ModWeaponTraitTags.create("materials/sentient_gauntlet"));
 
 
         LIVING_GAUNTLET = ITEMS.register("living_gauntlet",
                 () -> new SwordBaseItem(new Item.Properties(), LIVING_GAUNTLET_MATERIAL, WeaponArchetype.CESTUS,
-                        2.0F, 0.5F, 3.5));
+                        2.0F, 1F, 3.5));
 
         SENTIENT_GAUNTLET = ITEMS.register("sentient_gauntlet",
                 () -> new SwordBaseItem(new Item.Properties(), SENTIENT_GAUNTLET_MATERIAL, WeaponArchetype.CESTUS,
-                        2.0F, 0.5F, 3.5));
+                        2.0F, 1F, 3.5));
 
         REDHOT_SPARTAN_TAB = registerTab(TABS, "srp_spartans", () -> {
             ItemStack stack = LIVING_NUCLEUS.get().asItem().getDefaultInstance();
