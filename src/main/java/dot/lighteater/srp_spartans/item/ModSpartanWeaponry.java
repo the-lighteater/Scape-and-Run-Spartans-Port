@@ -2,10 +2,14 @@ package dot.lighteater.srp_spartans.item;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
+import com.oblivioussp.spartanweaponry.api.WeaponMaterial;
 import com.oblivioussp.spartanweaponry.api.data.model.ModelGenerator;
+import com.oblivioussp.spartanweaponry.api.tags.ModWeaponTraitTags;
 import com.oblivioussp.spartanweaponry.api.trait.ReachWeaponTrait;
 import com.oblivioussp.spartanweaponry.api.trait.SpeedModifierWeaponTrait;
 import com.oblivioussp.spartanweaponry.api.trait.WeaponTrait;
+import com.oblivioussp.spartanweaponry.item.SwordBaseItem;
+import com.oblivioussp.spartanweaponry.util.WeaponArchetype;
 import dot.lighteater.srp_spartans.SRPSpartans;
 import dot.lighteater.srp_spartans.custom.RecipeData;
 import dot.lighteater.srp_spartans.custom.WeaponConfig;
@@ -75,6 +79,8 @@ public class ModSpartanWeaponry extends SpartanAddon {
     public static final RegistryObject<WeaponTrait> REACH_3;
     public static final RegistryObject<WeaponTrait> IMMALLEABLE_1;
     public static final RegistryObject<WeaponTrait> IMMALLEABLE_2;
+    public static final RegistryObject<WeaponTrait> SHOCKWAVE_1;
+    public static final RegistryObject<WeaponTrait> SHOCKWAVE_2;
     public static final RegistryObject<WeaponTrait> UNCAPPED;
 
     public static final ArrayList<SpartanMaterial> MATERIALS;
@@ -124,6 +130,10 @@ public class ModSpartanWeaponry extends SpartanAddon {
     public static final RegistryObject<Item> SENTIENT_IMPALER;
     public static final RegistryObject<Item> LIVING_GAUNTLET;
     public static final RegistryObject<Item> SENTIENT_GAUNTLET;
+
+    public static final WeaponMaterial LIVING_GAUNTLET_MATERIAL;
+    public static final WeaponMaterial SENTIENT_GAUNTLET_MATERIAL;
+
 
     public static List<WeaponConfig> CONFIGS;
 
@@ -328,6 +338,8 @@ public class ModSpartanWeaponry extends SpartanAddon {
         REAPER = registerTrait(TRAITS, new ReaperTrait());
         IMMALLEABLE_1 = registerTrait(TRAITS, new ImmalleableTrait().setLevel(1));
         IMMALLEABLE_2 = registerTrait(TRAITS, new ImmalleableTrait().setLevel(2));
+        SHOCKWAVE_1 = registerTrait(TRAITS, new ShockwaveTrait().setLevel(1));
+        SHOCKWAVE_2 = registerTrait(TRAITS, new ShockwaveTrait().setLevel(2));
         UNCAPPED = registerTrait(TRAITS, new UncappedTrait().setLevel(1));
         MATERIALS = new ArrayList();
 
@@ -341,8 +353,6 @@ public class ModSpartanWeaponry extends SpartanAddon {
         SENTIENT_BUCKLER = ITEMS.register("sentient_buckler", () -> new ShieldItem(new Item.Properties()));
         LIVING_IMPALER = ITEMS.register("living_impaler", () -> new ChargedShieldItem(new Item.Properties()));
         SENTIENT_IMPALER = ITEMS.register("sentient_impaler", () -> new ChargedShieldItem(new Item.Properties()));
-        LIVING_GAUNTLET = ITEMS.register("living_gauntlet", () -> new SwordItem(Tiers.IRON, -1, 1, new Item.Properties()));
-        SENTIENT_GAUNTLET = ITEMS.register("sentient_gauntlet", () -> new SwordItem(Tiers.DIAMOND, -1, 1, new Item.Properties()));
         STICKS = Tags.Items.RODS_WOODEN;
 
         LIVING_CLOAKED = material("living_c", false, CLOAKING, HEAVY_1, REACH_1, UNCAPPED);
@@ -412,6 +422,18 @@ public class ModSpartanWeaponry extends SpartanAddon {
                 Pair.of(LIVING_BUCKLER, new RecipeData(new String[]{"LVV", "VHV", "VV "})),
                 Pair.of(LIVING_IMPALER, new RecipeData(new String[]{"LVP", "VHV", "PVV"}))
         );
+
+        LIVING_GAUNTLET_MATERIAL = new WeaponMaterial("living_gauntlet", "srp_spartans", 1000, 4, 9f, 15, ItemTags.create(new ResourceLocation("srp_spartans:repair_material")), ModWeaponTraitTags.create("materials/living_gauntlet"));
+        SENTIENT_GAUNTLET_MATERIAL = new WeaponMaterial("sentient_gauntlet", "srp_spartans", 1000, 4, 13f, 15, ItemTags.create(new ResourceLocation("srp_spartans:repair_material")), ModWeaponTraitTags.create("materials/sentient_gauntlet"));
+
+
+        LIVING_GAUNTLET = ITEMS.register("living_gauntlet",
+                () -> new SwordBaseItem(new Item.Properties(), LIVING_GAUNTLET_MATERIAL, WeaponArchetype.CESTUS,
+                        2.0F, 0.5F, 3.5));
+
+        SENTIENT_GAUNTLET = ITEMS.register("sentient_gauntlet",
+                () -> new SwordBaseItem(new Item.Properties(), SENTIENT_GAUNTLET_MATERIAL, WeaponArchetype.CESTUS,
+                        2.0F, 0.5F, 3.5));
 
         REDHOT_SPARTAN_TAB = registerTab(TABS, "srp_spartans", () -> {
             ItemStack stack = LIVING_NUCLEUS.get().asItem().getDefaultInstance();
